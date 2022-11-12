@@ -1,7 +1,7 @@
 // notes.ts
 
 import fs from 'fs/promises';
-import type { NotesType } from '~/types/NotesType';
+import type { NotesType } from '~/types/types';
 
 export async function getStoredNotes() {
   /**
