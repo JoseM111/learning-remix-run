@@ -3,6 +3,11 @@ import newNotesStyles from 'app/components/new_notes/NewNotesStyles.css';
 
 export function NewNotes() {
   return (
+    // side-note: `method` is a default HTML attribute for the <form> element
+    // this behavior is the browser default in the past via `event.preventDefault()`.
+    // by default, upon submitting the form, the browser will send an HTTP request to the server
+    // this component by default will send the post request to the route `/notes` since it is
+    // being used in the notes.tsx file/page
     <form method="post" id="note-form">
       <p>
         <label htmlFor="title">Title</label>
