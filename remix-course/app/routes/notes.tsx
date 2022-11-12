@@ -1,21 +1,32 @@
 // notes.tsx
-import { redirect } from '@remix-run/node';
-import type { ReactElement } from "react"
+import { json, redirect } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import type { ReactElement } from 'react';
 import NewNotes, { links as newNoteLinks } from '~/components/new_notes/NewNotes';
+import NotesList, { links as notesListLinks } from '~/components/notes_list/NotesList';
 import { getStoredNotes, storeNotes } from '~/data/notes';
 import type { ActionParams } from '~/types/types';
 
 function NotesPage(): ReactElement {
+  const loaderNotes = useLoaderData();
+
   return (
     <main>
       {/*new-note component*/}
       <NewNotes />
+      <NotesList notes={loaderNotes} />
     </main>
   );
 }
 
 export default NotesPage;
+
 // ########################################################
+
+export async function loader() {
+  const currentNotes = await getStoredNotes();
+  return json(currentNotes);
+}
 
 // action will only run in the server.
 // not in the browser. remix will only
@@ -41,5 +52,5 @@ export async function action({ request }: ActionParams) {
 export function links() {
   // merging the links from the NewNotes component
   // also called surfacing the links
-  return [...newNoteLinks()];
+  return [...newNoteLinks(), ...notesListLinks()];
 }
