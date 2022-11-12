@@ -1,7 +1,8 @@
 // NewNotes.tsx
 import newNotesStyles from 'app/components/new_notes/NewNotesStyles.css';
+import type { ReactElement } from "react"
 
-export function NewNotes() {
+function NewNotes(): ReactElement {
   return (
     // side-note: `method` is a default HTML attribute for the <form> element
     // this behavior is the browser default in the past via `event.preventDefault()`.

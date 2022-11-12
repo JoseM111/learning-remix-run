@@ -1,7 +1,8 @@
 // MainNavigation.tsx
 import { NavLink } from '@remix-run/react';
+import type { ReactElement } from "react"
 
-function MainNavigation() {
+function MainNavigation(): ReactElement {
   return (
     <nav id="main-navigation">
       <ul>

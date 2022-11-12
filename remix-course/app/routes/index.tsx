@@ -2,7 +2,7 @@
 import { Link } from '@remix-run/react';
 import homeStyles from '~/styles/home.css';
 
-export default function Index() {
+function Index() {
   return (
     <main id="content">
       <h1>A better way of keeping track of your notes</h1>
@@ -14,6 +14,8 @@ export default function Index() {
     </main>
   );
 }
+
+export default Index;
 
 // links function for homeStyles
 export function links() {

@@ -1,10 +1,11 @@
 // notes.tsx
 import { redirect } from '@remix-run/node';
+import type { ReactElement } from "react"
 import NewNotes, { links as newNoteLinks } from '~/components/new_notes/NewNotes';
 import { getStoredNotes, storeNotes } from '~/data/notes';
-import type { ActionParams, NotesType } from '~/types/types';
+import type { ActionParams } from '~/types/types';
 
-function NotesPage(): JSX.Element {
+function NotesPage(): ReactElement {
   return (
     <main>
       {/*new-note component*/}
