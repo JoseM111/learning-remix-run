@@ -1,6 +1,6 @@
 // notes.tsx
 import { json, redirect } from '@remix-run/node';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import { Link, useCatch, useLoaderData } from '@remix-run/react';
 import type { ReactElement } from 'react';
 import NewNotes, { links as newNoteLinks } from '~/components/new_notes/NewNotes';
@@ -9,6 +9,7 @@ import NotesList, {
 } from '~/components/notes_list/NotesList';
 import { getStoredNotes, storeNotes } from '~/data/notes';
 import type { DataArgParams, NotesType } from '~/types/types';
+// =========================================================
 
 // links function for NewNotesStyles
 export const links: LinksFunction = () => {
@@ -16,6 +17,11 @@ export const links: LinksFunction = () => {
   // also called surfacing the links
   return [...newNoteLinks(), ...notesListLinks()];
 };
+
+export const meta: MetaFunction = () => ({
+  title: 'All Notes Page',
+  description: 'Manage your notes with ease.'
+});
 // =========================================================
 
 function NotesPage(): ReactElement {

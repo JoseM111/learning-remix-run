@@ -1,15 +1,22 @@
 import { json } from '@remix-run/node';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import type { ReactElement } from 'react';
 import { getStoredNotes } from '~/data/notes';
 import noteDetailsStyles from '~/styles/note-details.css';
 import type { DataArgParams, NotesType } from '~/types/types';
+// =========================================================
 
 // link to the dynamic route for notesId
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: noteDetailsStyles }];
 };
+
+export const meta: MetaFunction = ({ data }) => ({
+  title: data.title as NotesType['title'],
+  description: 'Manage your notes with ease.',
+});
+
 // =========================================================
 
 function NotesDetailPage(): ReactElement {
@@ -33,6 +40,7 @@ function NotesDetailPage(): ReactElement {
 }
 
 export default NotesDetailPage;
+
 // ########################################################
 
 export async function loader({ params }: DataArgParams): Promise<string> {
@@ -62,4 +70,5 @@ export async function loader({ params }: DataArgParams): Promise<string> {
   // finally then return the selectedNote in your loader
   return selectedNote;
 }
+
 // ########################################################

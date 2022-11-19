@@ -15,6 +15,5 @@ export type NotesListType = {
 export type DataArgParams = {
   request: DataFunctionArgs['request'];
   params: DataFunctionArgs['params'];
-  
 };
 
