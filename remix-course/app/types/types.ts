@@ -1,5 +1,6 @@
 // types.ts
 import type { DataFunctionArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs } from "@remix-run/server-runtime/dist/router"
 
 export type NotesType = {
   id: string;
@@ -15,3 +16,10 @@ export type NotesListType = {
 export type ActionParams = {
   request: DataFunctionArgs['request'];
 };
+
+// type for the remix action function
+export type LoadParams = {
+  params: DataFunctionArgs['params'];
+};
+
+
