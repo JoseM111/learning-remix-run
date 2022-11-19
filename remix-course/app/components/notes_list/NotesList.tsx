@@ -5,7 +5,9 @@ import type { NotesListType, NotesType } from '~/types/types';
 import NotesListStyles from './NotesListStyles.css';
 
 // links function for NotesListStyles
-export const links = () => [{ rel: 'stylesheet', href: NotesListStyles }];
+export const links = () => {
+  return [{ rel: 'stylesheet', href: NotesListStyles }];
+};
 // =========================================================
 
 function NotesList({ notes }: NotesListType): ReactElement {

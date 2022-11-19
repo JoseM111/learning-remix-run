@@ -1,10 +1,9 @@
 import type { LinksFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
-import { LoaderFunctionArgs } from '@remix-run/server-runtime/dist/router';
 import type { ReactElement } from 'react';
 import { getStoredNotes } from '~/data/notes';
 import noteDetailsStyles from '~/styles/note-details.css';
-import type { LoadParams, NotesType } from '~/types/types';
+import type { DataArgParams, NotesType } from '~/types/types';
 
 // link to the dynamic route for notesId
 export const links: LinksFunction = () => {
@@ -35,7 +34,7 @@ function NotesDetailPage(): ReactElement {
 export default NotesDetailPage;
 // ########################################################
 
-export async function loader({ params }: LoadParams): Promise<string> {
+export async function loader({ params }: DataArgParams): Promise<string> {
   // fetching all entries from the notes.json
   // file of with our notes entry list
   const notes = await getStoredNotes();
@@ -45,7 +44,9 @@ export async function loader({ params }: LoadParams): Promise<string> {
 
   // check if the note is === to the id in the dynamic
   // url when the card is clicked.
-  const selectedNote: string = notes.find((note: NotesType) => note.id === notesId);
+  const selectedNote: string = notes.find((note: NotesType) => {
+    return note.id === notesId;
+  });
 
   // finally then return the selectedNote in your loader
   return selectedNote;

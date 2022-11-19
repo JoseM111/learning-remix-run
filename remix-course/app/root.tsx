@@ -9,13 +9,14 @@ import {
   ScrollRestoration,
   useCatch,
 } from '@remix-run/react';
+import type { ReactElement } from 'react';
 import MainNavigation from '~/components/main_nav/MainNavigation';
 import mainStyles from '~/styles/main.css';
 
 // links function for mainStyles
-export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: mainStyles }];
-};
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: mainStyles }
+];
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -59,7 +60,7 @@ export default function App() {
 }
 // ########################################################
 
-export function CatchBoundary() {
+export function CatchBoundary(): ReactElement {
   const caughtResponse = useCatch();
 
   return (
@@ -105,7 +106,7 @@ export function CatchBoundary() {
 // is a component that will render if an error is found in the app.
 // It allows you to be able to customize your error page. You can add
 // this component in any route file (server-file)
-export function ErrorBoundary({ error }: { error: Error }) {
+export function ErrorBoundary({ error }: { error: Error }): ReactElement {
   return (
     <html lang="en">
       <head>

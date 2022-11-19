@@ -8,7 +8,7 @@ import NotesList, {
   links as notesListLinks,
 } from '~/components/notes_list/NotesList';
 import { getStoredNotes, storeNotes } from '~/data/notes';
-import type { ActionParams, NotesType } from '~/types/types';
+import type { DataArgParams, NotesType } from '~/types/types';
 
 // links function for NewNotesStyles
 export const links: LinksFunction = () => {
@@ -35,11 +35,11 @@ export default NotesPage;
 // ########################################################
 
 export async function loader() {
-  const currentNotes = await getStoredNotes();
+  const currentNotes: Array<NotesType> = await getStoredNotes();
 
   if (!currentNotes || currentNotes.length === 0) {
     throw json(
-      { message: '[ERROR:/notes]: NO NOTES WERE FOUND...' },
+      { message: 'currently no new notes: [ ADD NOTE ]' },
       { status: 404, statusText: 'NOT FOUND' },
     );
   }
@@ -50,7 +50,7 @@ export async function loader() {
 // action will only run in the server.
 // not in the browser. remix will only
 // execute & store this function in the server.
-export async function action({ request }: ActionParams) {
+export async function action({ request }: DataArgParams) {
   const formData = await request.formData();
   const noteData = Object.fromEntries(formData) as NotesType;
 
@@ -82,7 +82,7 @@ export async function action({ request }: ActionParams) {
 
 // @CatchBoundary: Catches any errors responses. Just like ErrorBoundary,
 // you can add it on the route level or the root level (root.tsx)
-export function CatchBoundary() {
+export function CatchBoundary(): ReactElement {
   /** @useCatch: Returns the status code and thrown response data. */
   const caughtResponse = useCatch();
   const responseMessage = caughtResponse.data.message || 'No data found...';
@@ -102,7 +102,7 @@ export function CatchBoundary() {
 // error boundary component. this component will only be
 // used for this route. it will not be used globally unless
 // the `ErrorBoundary` component is used in the `root.tsx` file
-export function ErrorBoundary({ error }: { error: Error }) {
+export function ErrorBoundary({ error }: { error: Error }): ReactElement {
   return (
     <main className="error">
       <h1>[NOTES PAGE]: AN ERROR OCCURRED</h1>
