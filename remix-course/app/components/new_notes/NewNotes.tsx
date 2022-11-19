@@ -1,7 +1,18 @@
 // NewNotes.tsx
-import { Form, useActionData, useTransition as useNavigation } from '@remix-run/react';
-import newNotesStyles from 'app/components/new_notes/NewNotesStyles.css';
+import type { LinksFunction } from '@remix-run/node';
+import {
+  Form,
+  useActionData,
+  useTransition as useNavigation,
+} from '@remix-run/react';
+import newNotesStyles from '~/components/new_notes/NewNotesStyles.css';
 import type { ReactElement } from 'react';
+
+// links function for newNotesStyles
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: newNotesStyles },
+];
+// =========================================================
 
 function NewNotes(): ReactElement {
   const navigation = useNavigation();
@@ -16,7 +27,9 @@ function NewNotes(): ReactElement {
     fontFamily: 'agave Nerd Font Mono',
   };
 
-  const isTitleToShort = actionNotesData?.message && <p style={actionDataStyles}>{actionNotesData.message}</p>;
+  const isTitleToShort = actionNotesData?.message && (
+    <p style={actionDataStyles}>{actionNotesData.message}</p>
+  );
 
   return (
     // side-note: `method` is a default HTML attribute for the <form> element
@@ -45,7 +58,3 @@ function NewNotes(): ReactElement {
 }
 
 export default NewNotes;
-
-export function links() {
-  return [{ rel: 'stylesheet', href: newNotesStyles }];
-}

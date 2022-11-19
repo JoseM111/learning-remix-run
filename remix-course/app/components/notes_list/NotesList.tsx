@@ -3,6 +3,10 @@ import type { ReactElement } from 'react';
 import type { NotesListType, NotesType } from '~/types/types';
 import NotesListStyles from './NotesListStyles.css';
 
+// links function for NotesListStyles
+export const links = () => [{ rel: 'stylesheet', href: NotesListStyles }];
+// =========================================================
+
 function NotesList({ notes }: NotesListType): ReactElement {
   return (
     <ul id="note-list">
@@ -36,8 +40,3 @@ function NotesList({ notes }: NotesListType): ReactElement {
 
 export default NotesList;
 // ########################################################
-
-// links function for NotesListStyles
-export function links() {
-  return [{ rel: 'stylesheet', href: NotesListStyles }];
-}

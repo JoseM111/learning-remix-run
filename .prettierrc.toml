@@ -3,18 +3,19 @@
 bracketSpacing = true
 insertPragma = false
 jsxBracketSameLine = false
-printWidth = 80
+printWidth = 85
 proseWrap = "always"
 requirePragma = false
 semi = true
 singleQuote = true
 tabWidth = 2
 trailingComma = "all"
+softWrap = true
 
 [[overrides]]
 files = ["*.ts", "*.js", "*.tsx", "*.jsx", "*.json", "*.json5"]
 [overrides.options]
-printWidth = 120
+printWidth = 85
 tabWidth = 2
 
 [[overrides]]
