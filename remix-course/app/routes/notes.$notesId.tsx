@@ -1,3 +1,4 @@
+import { json } from '@remix-run/node';
 import type { LinksFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import type { ReactElement } from 'react';
@@ -47,6 +48,16 @@ export async function loader({ params }: DataArgParams): Promise<string> {
   const selectedNote: string = notes.find((note: NotesType) => {
     return note.id === notesId;
   });
+
+  // if the note with the proper id is selected then an error: 404
+  // will be thrown. so like for example going to route localhost:3000/notes/notes-1
+  // should return the error component with the logic in the if statement
+  if (!selectedNote) {
+    throw json(
+      { message: `COULD NOT FIND NOTE FOR ID: ${notesId}` },
+      { status: 404 },
+    );
+  }
 
   // finally then return the selectedNote in your loader
   return selectedNote;
